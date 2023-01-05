@@ -21,6 +21,7 @@
 
   /*=========font and typographie=========*/
   --body-font: "Poppins", sans-serif;
+  /* --body-font: "Roboto", sans-serif; */
 
   /* .5rem=8px,1rem=16px,1.5rem=24px ...*/
   --big-font-size: 2rem;
@@ -207,4 +208,30 @@ img {
 /* show menu */
 .show-menu {
   bottom: 0;
+}
+/* ======== home ========= */
+.home__container {
+  gap: 1rem;
+}
+.home__content {
+  grid-template-columns: 0.5fr 3fr;
+  padding-top: 3.5rem;
+  align-items: center;
+}
+
+.home__social {
+  display: grid;
+  grid-template-columns: max-content;
+  row-gap: 1rem;
+}
+.home__social-icon {
+  font-size: 1.25rem;
+  color: var(--first-color);
+}
+.home__social-icon:hover {
+  color: var(--first-color-alt);
+}
+.home__blob {
+  width: 200px;
+  fill: var(--first-color);
 }
