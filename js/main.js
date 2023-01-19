@@ -64,7 +64,7 @@ tabs.forEach((tab) => {
   });
 });
 // =============== swiper js ==========
-let swiper = new Swiper(".portfolio__container", {
+const swiper = new Swiper(".portfolio__container", {
   cssMode: true,
   loop: true,
 
@@ -76,4 +76,80 @@ let swiper = new Swiper(".portfolio__container", {
     el: ".swiper-pagination",
     clickable: true,
   },
+});
+// ============= scroll section active link ===========
+const sections = document.querySelectorAll("section[id]");
+
+function scrollActive() {
+  const scrollY = window.pageYOffset;
+
+  sections.forEach((current) => {
+    const sectionHeight = current.offsetHeight;
+    const sectionTop = current.offsetTop - 50;
+    let sectionId = current.getAttribute("id");
+
+    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+      document
+        .querySelector(".nav__menu a[href*=" + sectionId + "]")
+        .classList.add("active-link");
+    } else {
+      document
+        .querySelector(".nav__menu a[href*=" + sectionId + "]")
+        .classList.remove("active-link");
+    }
+  });
+}
+window.addEventListener("scroll", scrollActive);
+// ========== change background header ==========
+function scrollHeader() {
+  const nav = document.getElementById("header");
+
+  //when the scroll is greaTER THAN 80 VIEWPORT HEIGHT, add the scroll-header class to the header tag
+  if (this.scrollY >= 80) {
+    nav.classList.add("scroll-header");
+  } else {
+    nav.classList.remove("scroll-header");
+  }
+}
+window.addEventListener("scroll", scrollHeader);
+// =========== show scroll up ==========
+function scrollUp() {
+  const scrollUp = document.getElementById("scroll-up");
+
+  if (this.scrollY >= 560) scrollUp.classList.add("show-scroll");
+  else scrollUp.classList.remove("show-scroll");
+}
+window.addEventListener("scroll", scrollUp);
+// ========== dark light theme ==========
+const themeButton = document.getElementById("theme-button");
+const darkTheme = "dark-theme";
+const iconTheme = "uil-sun";
+
+//previously selected topic (if user selected)
+const selectedTheme = localStorage.getItem("selected-theme");
+const selectedIcon = localStorage.getItem("selected-icon");
+
+//obtain the current them that the interface has by validating the dark theme class
+const getCurrentTheme = () =>
+  document.body.classList.contains(darkTheme) ? "dark" : "light";
+const getCurrentIcon = () =>
+  themeButton.classList.contains(iconTheme) ? "uil-moon" : "uil-sun";
+
+//validate if the user previously choose a topic
+if (selectedTheme) {
+  //if the validation is fullfilled
+  document.body.classList[selectedTheme === "dark" ? "add" : "remove"](
+    "darkTheme"
+  );
+  themeButton.classList[selectedIcon === "uil-moon" ? "add" : "remove"](
+    iconTheme
+  );
+}
+//activate /desactivate the theme manually
+themeButton.addEventListener("click", () => {
+  document.body.classList.toggle(darkTheme);
+  themeButton.classList.toggle(iconTheme);
+
+  localStorage.setItem("selected-theme", getCurrentTheme);
+  localStorage.setItem("selected-icon", getCurrentIcon);
 });
