@@ -167,6 +167,7 @@ img {
   background-color: var(--body-color);
 }
 /* ========= Nav ========= */
+
 .nav {
   max-width: 968px;
   height: var(--header-height);
